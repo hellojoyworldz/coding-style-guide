@@ -1,5 +1,7 @@
 # prettier 스타일 가이드
 
+> 이 스타일 가이드는 [Prettier](https://prettier.io/docs/en/options)를 참조하여 작성되었습니다.
+ 
 Prettier는 코드 포멧터로, 코드를 일관되게 유지하는 데 사용됩니다.  
 .prettierrc 파일에 Prettier의 설정을 정의하는 JSON 파일입니다.
 
