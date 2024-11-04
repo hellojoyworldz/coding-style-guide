@@ -3,8 +3,23 @@
 Prettier는 코드 포멧터로, 코드를 일관되게 유지하는 데 사용됩니다.  
 .prettierrc 파일에 Prettier의 설정을 정의하는 JSON 파일입니다.
 
+## Prettier 설치
+### 프로젝트에 Prettier 설치(필수)
+```bash
+# npm으로 설치
+npm install --save-dev prettier
+
+# yarn으로 설치
+yarn add --dev prettier
+```
+### IDE 확장 프로그램 설치(권장)
+Prettier를 사용하려면 IDE에 Prettier 확장 프로그램을 설치해야 합니다.  
+- Visual Studio Code: "Prettier - Code formatter" 확장 프로그램 설치
+- WebStorm: 내장된 "Prettier" 지원 활성화
+
 ## .prettierrc 파일 경로
 root 디렉토리에 .prettierrc 파일을 생성합니다.
+
 
 ## .prettierrc 옵션 설명
 ```json
@@ -16,7 +31,10 @@ root 디렉토리에 .prettierrc 파일을 생성합니다.
   "useTabs": false,
   "printWidth": 80,
   "bracketSpacing": true,
-  "arrowParens": "always"
+  "arrowParens": "always",
+  "endOfLine": "lf",
+  "jsxSingleQuote": false,
+  "bracketSameLine": false
 }
 ```
 
@@ -52,6 +70,7 @@ const greeting = "Hello, World!";
 >- all: 가능한 모든 곳에 쉼표를 추가(함수의 안자값에도 쉼표 표시)
 ```js
 // 배열, 객체 
+
 // trailingComma: none
 const array = [
     'apple',
@@ -66,6 +85,8 @@ const array = [
 ];
 ```
 ```js
+// 함수
+
 // trailingComma: none
 // trailingComma: es5
 function greet(
@@ -90,7 +111,7 @@ function greet(
 ```js
 // tabWidth: 2
 function greet() {
-    console.log('Hello!');
+  console.log('Hello!');
 }
 
 // tabWidth: 4
@@ -125,13 +146,6 @@ function greet() {
 function greet() {
   console.log('This is a long sentence that will wrap to the next line after it exceeds 80 characters.');
 }
-
-// printWidth: 40
-function greet() {
-  console.log(
-    'This is a long sentence that will wrap to the next line after it exceeds 40 characters.'
-  );
-}
 ```
 ---
 ### 7. bracketSpacing: 중괄호 사이의 공백 여부  
@@ -158,9 +172,52 @@ const greet = (name) => `Hello, ${name}`;
 const greet = name => `Hello, ${name}`;
 ```
 ---
+### 9. endOfLine: 줄바꿈 문자 설정
+줄바꿈(줄 끝)에 사용할 문자를 설정합니다.
+>- lf: \n - Unix 및 macOS 줄바꿈 문자(LF) (기본값)
+>- crlf: \r\n - Windows 줄바꿈 문자(CRLF) 
+>- cr: \r - Macintosh 줄바꿈 문자(CR) 
+>- auto: 파일의 첫 줄바꿈 문자에 따라 설정
+---
+### 10. jsxSingleQuote: JSX에서 작은따옴표 사용 여부
+JSX에서 문자열에 작은따옴표(')를 사용할지 여부입니다.
+>- true: 작은따옴표(')를 사용
+>- false: 큰따옴표(")를 사용 (기본값)
+```js
+// jsxSingleQuote: true
+const element = <div className='container'></div>;
 
+// jsxSingleQuote: false
+const element = <div className="container"></div>;
+```
+---
+### 11. bracketSameLine: 중괄호 위치 설정
+JSX 요소의 마지막 중괄호(`>`)를 같은 줄에 둘지 다음 줄로 내릴지 설정합니다.
+>- true: 같은 줄에 둠
+>- false: 다음 줄로 내림 (기본값)
+```js
+// bracketSameLine: true
+<button
+    className="prettier-class"
+    id="prettier-id"
+    onClick={this.handleClick}>
+    Click Here
+</button>
+
+// bracketSameLine: false
+<button
+    className="prettier-class"
+    id="prettier-id"
+    onClick={this.handleClick}
+>
+    Click Here
+</button>
+```
+
+---
 #### 버전 및 수정정보
-현재버전: 0.0.1  
+현재버전: 0.0.2  
 
 수정이력:
+- 2024.11.04(v.0.0.2): Prettier 설치 방법 및 .prettierrc 옵션 설명 추가
 - 2024.09.16(v.0.0.1): 초기 문서 작성
