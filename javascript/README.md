@@ -339,14 +339,36 @@ logo-dark-2x.png      // 이미지의 테마와 해상도 명시
 icon-email-2x.png     // 이미지의 해상도 명시
 ```
 
-### 접미사가 붙은 파일
+### 파일 접미사 규칙
+- 같은 폴더 내 파일의 용도나 종류를 구분하기 위해 접미사를 사용합니다.
 - 컴포넌트가 PascalCase인 경우 PascalCase인를, 그 외의 경우 kebab-case를 사용합니다.
 - 접미사는 점(.)으로 구분합니다.
 - 파일 확장자 앞에 위치합니다.
+```js
+components/Button/
+  Button.tsx           // 컴포넌트
+  Button.styles.ts     // 스타일 
+  Button.test.tsx      // 테스트
+  Button.types.ts      // 타입 정의
+
+services/auth/
+  auth.ts              // 주요 로직
+  auth.constants.ts    // 상수
+  auth.types.ts        // 타입 정의
+  auth.test.ts         // 테스트
+  auth.utils.ts        // 유틸리티
+```
 
 #### 테스트 파일
+- 타입 정의를 별도 파일로 분리할 때 사용합니다.
 - 테스트 대상 파일명 뒤에 .test 또는 .spec 접미사를 사용합니다.
+- 테스트 대상 파일명과 일치하도록 작성합니다.
+
 ```js
+// 테스트 대상 파일
+UserProfile.js             
+user-profile.js
+
 // bad
 UserProfileTest.js        // 접미사를 점으로 구분하지 않음
 user-profile-test.js      // 테스트 대상 파일명과 일치하지 않음
@@ -357,51 +379,71 @@ user-profile.spec.js      // 테스트 대상 파일명과 일치
 ```
 
 #### 타입 정의 파일
+- TypeScript 타입 정의를 별도 파일로 분리할 때 사용합니다.
 - 타입 정의 파일명 뒤에 .types 접미사를 사용합니다.
+- 타입 정의 파일명과 일치하도록 작성합니다.
 ```js
+// 타입 정의 대상 파일
+UserProfile.ts          
+user-profile.ts
+
 // bad
-UserType.js               // 접미사를 점으로 구분하지 않음
-user-type.js              // 타입 정의 파일명과 일치하지 않음
+UserProfileType.ts               // 접미사를 점으로 구분하지 않음
+user-profile-type.ts              // 타입 정의 파일명과 일치하지 않음
 
 // good
-User.types.ts             // 점으로 접미사 구분
-user.types.ts             // 타입 정의 파일명과 일치
+UserProfile.types.ts             // 점으로 접미사 구분
+user-profile.types.ts             // 타입 정의 파일명과 일치
 ```
 
 #### 스타일 파일
 - 스타일 파일명 뒤에 .styles 접미사를 사용합니다.
+- CSS Module을 사용할 때는 .styles.module 접미사를 사용합니다.
+- 
 ```js
+// 타입 정의 대상 파일
+UserProfile.js
+user-profile.js
+
 // bad
-UserProfileStyle.js       // 접미사를 점으로 구분하지 않음
-user-profile-style.js     // 스타일 파일명과 일치하지 않음
+UserProfileStyle.css       // 접미사를 점으로 구분하지 않음
+user-profile-style.css     // 스타일 파일명과 일치하지 않음
 
 // good
-UserProfile.styles.js     // 점으로 접미사 구분
-user-profile.styles.js    // 스타일 파일명과 일치
+UserProfile.styles.css     // 점으로 접미사 구분
+user-profile.styles.module.css    // CSS Module 사용 시
 ```
 
 #### 상수 파일
 - 상수 파일명 뒤에 .constants 접미사를 사용합니다.
 ```js
+// 타입 정의 대상 파일
+UserProfile.js
+user-profile.js
+
 // bad
-UserConstants.js          // 접미사를 점으로 구분하지 않음
-user-constants.js         // 상수 파일명과 일치하지 않음
+UserProfileConstants.js          // 접미사를 점으로 구분하지 않음
+user-profile-constants.js         // 상수 파일명과 일치하지 않음
 
 // good
-User.constants.js         // 점으로 접미사 구분
-user.constants.js         // 상수 파일명과 일치
+UserProfile.constants.js         // 점으로 접미사 구분
+user-profile.constants.js         // 상수 파일명과 일치
 ```
 
 #### 유틸리티 파일
 - 유틸리티 파일명 뒤에 .utils 접미사를 사용합니다.
 ```js 
+// 타입 정의 대상 파일
+UserProfile.js
+user-profile.js
+
 // bad
-UserUtil.js               // 접미사를 점으로 구분하지 않음
-user-util.js              // 유틸리티 파일명과 일치하지 않음
+UserProfileUtil.js               // 접미사를 점으로 구분하지 않음
+user-profile-util.js              // 유틸리티 파일명과 일치하지 않음
 
 // good
-User.utils.js             // 점으로 접미사 구분
-user.utils.js             // 유틸리티 파일명과 일치
+UserProfile.utils.js             // 점으로 접미사 구분
+user-profile.utils.js             // 유틸리티 파일명과 일치
 ```
 
 ## 코드 구성
