@@ -240,6 +240,170 @@ const deleteUsers = (userIds) => {}
 const deleteAllUsers = () => {}
 ```
 
+### 폴더명
+- 일반적으로 폴더명은 kebab-case를 사용합니다.
+- 폴더명은 명사 복수형으로 작성합니다.
+- 폴더의 용도나 목적을 명확히 표현합니다.
+
+```js
+// bad
+util/                  // 단수형 사용
+component/             // 단수형 사용
+imgs/                  // 약어 사용
+util_functions/       // snake_case 사용
+
+// good
+utils/                 // 복수형, 전체 단어 사용
+components/            // 복수형 사용
+images/                // 전체 단어 사용
+```
+```js
+// 프로젝트 구조 예시
+src/
+  assets/             // 정적 파일들
+  components/         // 재사용 컴포넌트들
+  pages/              // 페이지 컴포넌트들
+  hooks/              // 커스텀 훅들
+  utils/              // 유틸리티 함수들
+  apis/               // API 관련 파일들
+  contexts/           // Context 파일들
+  constants/          // 상수 파일들
+  types/              // 타입 정의 파일들
+  styles/             // 스타일 관련 파일들
+```
+
+### 파일명
+- 일반적으로 파일명은 kebab-case를 사용합니다.
+- 파일명은 명사로 작성합니다.
+- 파일의 용도나 목적을 명확히 표현합니다.
+```js
+// bad
+userProfile.js        // camelCase 사용
+UserProfile.js        // PascalCase 사용
+user_profile.js       // snake_case 사용
+usrprof.js            // 약어 사용
+
+// good
+user-profile.js        // kebab-case 사용
+auth-validator.js      // 파일 목적 명확
+api-error-handler.js   // 전체 단어 사용
+```
+
+### API 관련 파일
+- API 관련 파일명은 kebab-case를 사용합니다.
+- API 관련 파일은 용도와 리소스를 명확히 표현합니다.
+- 특정 도메인이나 기능별로 구분하여 작성합니다.
+```js
+// bad
+api.js               // 너무 일반적인 이름
+userAPI.js           // camelCase 사용
+UserRequests.js      // PascalCase 사용
+
+// good
+user-api.js          // 사용자 관련 API
+auth-service.js      // 인증 관련 서비스
+product-repository.js // 상품 관련 저장소
+```
+
+### 컴포넌트 파일
+- 컴포넌트 파일은 PascalCase 사용을 권장하며, kebab-case를 사용할 수 있습니다.
+- 컴포넌트의 역할이나 기능을 명확히 표현합니다.
+```js
+// bad
+userprofile.jsx        // camelCase 사용
+user_profile.jsx       // snake_case 사용
+
+// good
+UserProfile.jsx        // PascalCase 사용
+user-profile.jsx       // kebab-case 사용
+```
+
+### 이미지 파일
+- 이미지 파일명은 kebab-case를 사용합니다.
+- 이미지의 용도나 내용을 명확히 표현합니다.
+- button-, icon-, thumb- 등 접두사로 이미지의 종류나 용도를 표현할 수 있습니다.
+- -light, -dark 등 접미사로 이미지의 테마를 표현할 수 있습니다.
+- -1x, -2x, -3x 등 접미사로 이미지의 해상도를 표현할 수 있습니다.
+
+```js
+// bad
+mainBanner.jpg        // camelCase 사용
+Image_1234.png            // 의미 없는 이름
+
+// good
+main-banner.jpg       // kebab-case 사용
+button-close.png      // 이미지의 용도 명확히 표현
+icon-sns-facebook.png // 이미지의 종류와 용도 명확히 표현
+thumb-product.jpg     // 이미지의 용도 명확히 표현
+logo-dark-2x.png      // 이미지의 테마와 해상도 명시
+icon-email-2x.png     // 이미지의 해상도 명시
+```
+
+### 접미사가 붙은 파일
+- 컴포넌트가 PascalCase인 경우 PascalCase인를, 그 외의 경우 kebab-case를 사용합니다.
+- 접미사는 점(.)으로 구분합니다.
+- 파일 확장자 앞에 위치합니다.
+
+#### 테스트 파일
+- 테스트 대상 파일명 뒤에 .test 또는 .spec 접미사를 사용합니다.
+```js
+// bad
+UserProfileTest.js        // 접미사를 점으로 구분하지 않음
+user-profile-test.js      // 테스트 대상 파일명과 일치하지 않음
+
+// good
+UserProfile.test.js       // 점으로 접미사 구분
+user-profile.spec.js      // 테스트 대상 파일명과 일치
+```
+
+#### 타입 정의 파일
+- 타입 정의 파일명 뒤에 .types 접미사를 사용합니다.
+```js
+// bad
+UserType.js               // 접미사를 점으로 구분하지 않음
+user-type.js              // 타입 정의 파일명과 일치하지 않음
+
+// good
+User.types.ts             // 점으로 접미사 구분
+user.types.ts             // 타입 정의 파일명과 일치
+```
+
+#### 스타일 파일
+- 스타일 파일명 뒤에 .styles 접미사를 사용합니다.
+```js
+// bad
+UserProfileStyle.js       // 접미사를 점으로 구분하지 않음
+user-profile-style.js     // 스타일 파일명과 일치하지 않음
+
+// good
+UserProfile.styles.js     // 점으로 접미사 구분
+user-profile.styles.js    // 스타일 파일명과 일치
+```
+
+#### 상수 파일
+- 상수 파일명 뒤에 .constants 접미사를 사용합니다.
+```js
+// bad
+UserConstants.js          // 접미사를 점으로 구분하지 않음
+user-constants.js         // 상수 파일명과 일치하지 않음
+
+// good
+User.constants.js         // 점으로 접미사 구분
+user.constants.js         // 상수 파일명과 일치
+```
+
+#### 유틸리티 파일
+- 유틸리티 파일명 뒤에 .utils 접미사를 사용합니다.
+```js 
+// bad
+UserUtil.js               // 접미사를 점으로 구분하지 않음
+user-util.js              // 유틸리티 파일명과 일치하지 않음
+
+// good
+User.utils.js             // 점으로 접미사 구분
+user.utils.js             // 유틸리티 파일명과 일치
+```
+
 ## 코드 구성
 ### 모듈 시스템
 - 모듈시스템은 CommonJS와 ES Modules 두 가지가 있습니다.
@@ -407,10 +571,11 @@ import { API_ROUTES } from '../constants/routes';
 
 ---
 #### 버전 및 수정정보
-현재버전: 0.0.4
+현재버전: 0.0.5
 
 수정이력:
-- 2024.110.7(v.0.0.4): 코드 구성 작성
+- 2024.11.07(v.0.0.5): 명명 규칙 폴더명 추가
+- 2024.11.07(v.0.0.4): 코드 구성 작성
 - 2024.11.07(v.0.0.3): 명명 규칙 API 요청 함수 추가
 - 2024.11.05(v.0.0.2): 명명 규칙 작성
 - 2024.11.04(v.0.0.1): 초기 문서 작성
