@@ -240,15 +240,177 @@ const deleteUsers = (userIds) => {}
 const deleteAllUsers = () => {}
 ```
 
+## 코드 구성
+### 모듈 시스템
+- 모듈시스템은 CommonJS와 ES Modules 두 가지가 있습니다.
+- 프로젝트 내에서 하나의 모듈 시스템으로 통일하는 것이 바람직합니다.
+- ES Modules 사용 시 package.json 파일에 type: module을 추가합니다.
+```json
+// package.json
+{
+  "type": "module"    
+}
+```
+
+#### CommonJS
+- 확장자가 cjs 또는 js인 파일은 CommonJS를 사용합니다.
+- CommonJS 시스템은 require() 함수를 사용하여 모듈을 불러옵니다.
+- module.exports 또는 export 객체를 사용하여 모듈을 내보냅니다.
+
+```js
+// 불러오기
+const express = require('express');
+const { helper } = require('./helper');
+
+// 내보내기
+module.exports = class Service { };
+// 또는
+exports.helper = { };
+````
+
+#### ES Modules
+- 확장자가 mjs 또는 js인 파일은 ES Modules를 사용합니다.
+- 모듈 시스템은 ES6의 import/export 구문을 사용하여 모듈을 불러옵니다.
+- export 또는 export default를 사용하여 모듈을 내보냅니다.
+- 
+```js
+// 불러오기
+import React from 'react';
+import { useState } from 'react';
+import * as utils from './utils';
+
+// 내보내기
+export default class Service { }    
+export const helper = { };
+````
+
+#### 혼용 시 주의사항
+- 한 프로젝트 내에서는 하나의 모듈 시스템을 사용하여 일관성을 유지합니다.
+- 부득이하게 혼용해야 할 경우 파일 확장자로 명확히 구분합니다.
+  - .mjs: ES Modules 전용
+  - .cjs: CommonJS 전용
+  - .js: package.json의 "type" 필드 설정을 따름
+
+### 모듈 설계 원칙
+- 모듈은 단일 책임 원칙을 준수하여 작성합니다.
+- 모듈은 재사용 가능하도록 설계합니다.
+- 모듈은 의존성을 최소화하여 결합도를 낮춥니다.
+
+```js
+// Good - 단일 책임 원칙 준수
+// 사용자 관리와 관련된 기능만 포함하여 단일 책임 원칙을 준수합니다.
+class UserService {
+  getUser() { }
+  updateUser() { }
+  deleteUser() { }
+}
+
+// Bad - 여러 책임이 혼합됨
+// 사용자 조회, 이메일 전송, 결제 처리 등 여러 역할을 포함하여 단일 책임을 위반합니다.
+class Service {
+  getUser() { }
+  sendEmail() { }
+  processPayment() { }
+}
+```
+
+### 파일 내부 구조
+- 모듈은 종속성이 높은 것부터 낮은 순서로 작성합니다. (상위 모듈부터 하위 모듈 순)
+- 사용하지 않는 모듈은 즉시 제거하여 불필요한 임포트를 방지합니다.
+- 핵심 노드 모튤 -> 외부 라이브러리 -> 설정/환경 파일 -> 데이터베이스/ORM 관련 -> 내부 모듈 순으로 작성합니다.
+- 내부 모듈은 미들웨어 -> 서비스 -> 유틸리티 -> 상수 순으로 작성합니다.
+- 각 그룹 사이에 빈 줄을 넣어 구분하는 것을 권장합니다.
+- 각 그룹 내에서는 알파벳 순으로 정렬하는 것을 권장합니다.
+
+#### CommonJS 예시
+```js
+// CommonJS 사용 시:
+// 1. 핵심 노드 모듈
+const path = require('path');
+const fs = require('fs');
+const http = require('http');
+
+// 2. 외부 라이브러리
+const express = require('express');
+const lodash = require('lodash');
+const axios = require('axios');
+
+// 3. 설정/환경 파일
+const config = require('../config');
+const env = require('../env');
+
+// 4. 데이터베이스/ORM 관련
+const mongoose = require('mongoose');
+const { sequelize } = require('../models');
+
+// 5-1. 내부 미들웨어
+const { auth } = require('../middleware/auth');
+const { validate } = require('../middleware/validate');
+
+// 5-2. 내부 서비스
+const UserService = require('../services/user-service');
+const AuthService = require('../services/auth-service');
+
+// 5-3. 내부 유틸리티
+const { logger } = require('../utils/logger');
+const { formatDate } = require('../utils/date');
+
+// 5-4. 내부 상수
+const { ERROR_CODES } = require('../constants/errors');
+const { API_ROUTES } = require('../constants/routes');
+```
+
+#### ES Modules 예시
+```js
+// ES Modules 사용 시:
+// 1. 핵심 노드 모듈
+import path from 'path';
+import fs from 'fs';
+import http from 'http';
+
+// 2. 외부 라이브러리
+import express from 'express';
+import lodash from 'lodash';
+import axios from 'axios';
+
+// 3. 설정/환경 파일
+import config from '../config';
+import env from '../env';
+
+// 4. 데이터베이스/ORM 관련
+import mongoose from 'mongoose';
+import { sequelize } from '../models';
+
+// 5. 내부 미들웨어
+import { auth } from '../middleware/auth';
+import { validate } from '../middleware/validate';
+
+// 6. 내부 서비스
+import UserService from '../services/user-service';
+import AuthService from '../services/auth-service';
+
+// 7. 내부 유틸리티
+import { logger } from '../utils/logger';
+import { formatDate } from '../utils/date';
+
+// 8. 내부 상수
+import { ERROR_CODES } from '../constants/errors';
+import { API_ROUTES } from '../constants/routes';
+```
+
+
+
+
 
 
 
 
 ---
 #### 버전 및 수정정보
-현재버전: 0.0.3
+현재버전: 0.0.4
 
 수정이력:
+- 2024.110.7(v.0.0.4): 코드 구성 작성
 - 2024.11.07(v.0.0.3): 명명 규칙 API 요청 함수 추가
 - 2024.11.05(v.0.0.2): 명명 규칙 작성
 - 2024.11.04(v.0.0.1): 초기 문서 작성
