@@ -4,8 +4,7 @@
 
 
 ## 목차
-명명 규칙  
-코드 포맷팅  
+명명 규칙
 코드 구성  
 기본 원칙  
 최신 문법 활용  
@@ -224,6 +223,21 @@ const fetchUserEamil = (userId) => {}
 
 // 식별자 명시
 const fetchUserEmailById = (userId) => {}
+```
+
+##### 삭제
+- 단일 항목 삭제는 단수형, 여러 항목 삭제는 복수형으로 작성합니다.
+- 전체 삭제의 경우 deletetAll 을 사용합니다.
+
+```js
+// 단일 항목 삭제
+const deleteUser = (userId) => {}
+
+// 여러 항목 삭제
+const deleteUsers = (userIds) => {}
+
+// 전체 삭제
+const deleteAllUsers = () => {}
 ```
 
 
