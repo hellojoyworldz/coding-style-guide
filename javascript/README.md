@@ -187,7 +187,44 @@ const filterActiveUsers = () => {}
 const sortUsersByAge = () => {}
 ```
 
+#### API 요청 관련 함수
+- HTTP Method에 따라 함수명을 작성합니다.
+- 조회 - GET 요청은 fetch + 명사 형태로 작성합니다.
+- 생성 - POST 요청은 create + 명사 형태로 작성합니다.
+- 수정 - PUT, PATCH 요청은 update + 명사 형태로 작성합니다.
+- 삭제 - DELETE 요청은 delete + 명사 형태로 작성합니다.
 
+```js
+// 조회 (GET)
+const fetchUsers = () => {}
+
+// 생성 (POST)
+const createUser = () => {}
+
+// 수정 (PUT/PATCH)
+const updateUser = () => {}
+
+// 삭제 (DELETE)
+const deleteUser = () => {}
+```
+
+##### 조회
+- 목록 조회는 복수형으로 작성하고 단일 항목 조회는 단수형으로 작성합니다.
+- 특정 속성을 조회하는 경우 조회하는 속성을 명시합니다.
+- 식별자 명시가 필요한 경우 by + 속성명 형태로 작성합니다.
+
+```js
+// 목록 조회
+const fetchUsers = () => {}
+const fetchUsersEmails = () => {}
+
+// 단일 항목 조회
+const fetchUsersEmails = () => {}
+const fetchUserEamil = (userId) => {}
+
+// 식별자 명시
+const fetchUserEmailById = (userId) => {}
+```
 
 
 
@@ -195,8 +232,9 @@ const sortUsersByAge = () => {}
 
 ---
 #### 버전 및 수정정보
-현재버전: 0.0.2
+현재버전: 0.0.3
 
 수정이력:
+- 2024.11.07(v.0.0.3): 명명 규칙 API 요청 함수 추가
 - 2024.11.05(v.0.0.2): 명명 규칙 작성
 - 2024.11.04(v.0.0.1): 초기 문서 작성
