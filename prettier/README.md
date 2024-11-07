@@ -5,25 +5,25 @@
 Prettier는 코드 포멧터로, 코드를 일관되게 유지하는 데 사용됩니다.  
 .prettierrc 파일에 Prettier의 설정을 정의하는 JSON 파일입니다.
 
-## Prettier 설치
+## 1.Prettier 설치
 ### 프로젝트에 Prettier 설치(필수)
 ```bash
-# npm으로 설치
 npm install --save-dev prettier
-
-# yarn으로 설치
-yarn add --dev prettier
 ```
 ### IDE 확장 프로그램 설치(권장)
 Prettier를 사용하려면 IDE에 Prettier 확장 프로그램을 설치해야 합니다.  
 - Visual Studio Code: "Prettier - Code formatter" 확장 프로그램 설치
 - WebStorm: 내장된 "Prettier" 지원 활성화
 
-## .prettierrc 파일 경로
+## 2. Prettier 설정
+### .prettierrc 파일 경로
 root 디렉토리에 .prettierrc 파일을 생성합니다.
 
+### .prettierignore 파일 경로(선택)
+root 디렉토리에 .prettierignore 파일을 생성하여 Prettier에서 무시할 파일을 지정합니다.
 
-## .prettierrc 옵션 설명
+
+## 3. .prettierrc 옵션 설명
 ```json
 {
   "semi": true,
