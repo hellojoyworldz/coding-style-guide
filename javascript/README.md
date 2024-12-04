@@ -4,15 +4,13 @@
 
 
 ## 목차
-명명 규칙
-코드 구성  
-기본 원칙  
-최신 문법 활용  
-성능 고려사항  
+명명 규칙  
+코드 구성   
 주석 작성 규칙  
+성능 고려사항  
+
 에러 처리  
 비동기 처리
-
 조건 확인
 
 ## 명명 규칙(Naming Conventions)
@@ -31,13 +29,15 @@ const fn = 'John';                                  // 약어 사용 지양
 const bgCol = '#fff';                               // 약어 사용 지양
 const userID = 1;                                   // 약어는 전체 대문자로 표기하지 않음
 
-// good
+// ✅ good
 const currentDate = moment().format('YYYY/MM/DD');  // 명확한 이름
 const maxCount = 10;                                // 의미 있는 이름
 const firstName = 'John';                           // 약어를 풀어서 사용
 const backgroundColor = '#fff';                     // 약어를 풀어서 사용
 const userId = 1;                                   // 약어도 camelCase에 맞게 일관성 유지
 ```
+
+#### 예약어 사용 금지
 
 #### Array
 - 배열명은 복수형으로 작성합니다.
@@ -49,7 +49,7 @@ const namesList = ['John', 'Jane', 'Jim'];  // List 접미사 불필요
 const color = ['#fff', '#000', '#f00'];     // 단수형 사용
 const array = [1,2,3];                      // 의미없는 이름
 
-// good
+// ✅ good
 const names = ['John', 'Jane', 'Jim'];      // 복수형 사용
 const colors = ['#fff', '#000', '#f00'];    // 복수형 사용으로 의미 명확화
 const activeItems = [1,2,3];                // 구체적인 배열의 의미 전달
@@ -60,12 +60,12 @@ const activeItems = [1,2,3];                // 구체적인 배열의 의미 전
 - 객체임을 나타내는 접미사 Object, Map, Set 등은 사용하지 않습니다.
 
 ```js
-// bad
+// ❌ bad
 const userObject = { name:'John', age:30 };           // Object 접미사 불필요
 const obj = { theme:'dark', lang:'en' };              // 의미없는 이름
 const data = { brand:'Hyundai', model:'Sonata' };     // 너무 모호함
 
-// good
+// 👍🏻 good
 const user = { name:'John', age:30 };                 // 명확한 단수형 이름
 const config = { theme:'dark', lang:'en' };           // 객체의 용도를 명확히 표현
 const car = { brand:'Hyundai', model:'Sonata' };      // 객체의 의미를 직관적으로 표현
@@ -83,7 +83,7 @@ let isHidden = false;        // 부정이 true로 표현
 let notActive = true;        // 부정문 사용
 let processing = true;       // 현재 상태가 불분명함
 
-// good
+// 👍🏻 good
 let isVisible = true;        // 동사로 시작
 let isShow  = true;          // 긍정이 true로 표현
 let isActive = true;         // 긍정문 사용
@@ -99,7 +99,7 @@ let isProcessing = true;     // 현재 상태를 명확히 전달
 class userProfile{} // camelCase 사용
 class DoThis{}      // 동사 사용
 
-// good
+// 👍🏻 good
 class UserProfile{}      // PascalCase 사용
 class PaymentProcessor{} // 명사 사용
 
@@ -115,7 +115,7 @@ const taxRate = 0.1;            // camelCase 사용
 const API = 'https://api.com';  // 명확한 의미정보 부족
 const TIMEOUT = 5000;           // 단위 정보 누락으로 명확하지 않음
 
-// good
+// 👍🏻 good
 const TAX_RATE = 0.1;                   // 대문자와 언더스코어 사용
 const API_BASE_URL = 'https://api.com'; // 명확한 정보 제공
 const DEFAULT_TIMEOUT_MS = 5000;        // 단위 정보 포함으로 명확한 정보 제공
@@ -128,13 +128,13 @@ const DEFAULT_TIMEOUT_MS = 5000;        // 단위 정보 포함으로 명확한 
 - handle, get, calculate, validate, fetch, create, update, delete 등의 접두사를 사용합니다.
 
 ```js
-// bad
+// ❌ bad
 function user_data(){}             // snake_case 사용
 function DoThing(){}               // PascalCase 사용
 function useProfileGet() {}        // 동사로 시작하지 않음
 function handle(){}                // 너무 모호한 이름
 
-// good
+// ✅ good
 function getUserProfile(){}     // 동사 + 명사 형태
 function calculateTotal(){}     // 함수 기능에 맞는 이름 사용
 function validateEmail(){}      // 수행하는 작업이 구체적으로 드러남
@@ -146,11 +146,11 @@ function handleClick(){}        // 기능이 명확하게 드러남
 - props로 넘길 경우 on + 이벤트명 형태로 사용합니다.
 - 어떤 기능을 가지고 있는지 유추할 수 있도록 작성합니다.
 ```js
-// bad
+// ❌ bad
 <button onClick={handleClick1}>리셋 버튼</button>
 <button onClick={handleClick2}>제출 버튼</button>
 
-// good 
+// 👍🏻 good 
 <button onClick={handleResetClick}>리셋 버튼</button>
 <button onClick={handleSubmitClick}>제출 버튼</button>
 ```
@@ -246,14 +246,14 @@ const deleteAllUsers = () => {}
 - 폴더의 용도나 목적을 명확히 표현합니다.
 
 ```js
-// bad
+// ❌ bad
+util_functions/        // snake_case 사용
 util/                  // 단수형 사용
 component/             // 단수형 사용
 imgs/                  // 약어 사용
-util_functions/       // snake_case 사용
-
-// good
-utils/                 // 복수형, 전체 단어 사용
+        
+// ✅ good
+utils/                 // 복수형 사용
 components/            // 복수형 사용
 images/                // 전체 단어 사용
 ```
@@ -606,9 +606,436 @@ import { API_ROUTES } from '../constants/routes';
 
 
 
+## 기본 원칙
 
+### 변수 선언
 
+#### 변수 선언자 사용
+- `const` 사용을 기본으로 합니다.
+- `let`은 재할당이 필요한 경우에만 사용합니다.
+- `var` 사용 금지합니다.
 
+```js
+// best - const 사용
+const superPower = new SuperPower();
+
+// good - 재할당이 필요한 경우만
+let counter = 0;
+counter += 1;
+
+// bad
+var superPower = new SuperPower();
+```
+
+#### 선언과 할당
+- 변수는 한 번에 하나씩만 선언합니다.
+- 선언과 할당을 분리하지 않습니다.
+
+```js
+// good
+const superPower = new SuperPower();
+const name = 'Bruce Wayne';
+const heroes = ['Batman', 'Superman'];
+
+// bad - 한 줄에 여러 변수 선언
+const items = getItems(),
+      goSportsTeam = true,
+      dragonball = 'z';
+
+// Bad - 선언과 할당 분리
+let superPower;
+superPower = new SuperPower();
+```
+
+#### 객체와 배열 선언
+- 객체와 배열을 선언할 때 `const` 를 사용합니다.
+- 객체와 배열의 내부 요소를 변경할 수 있지만 재할당은 금지합니다.
+
+```js
+// Good
+const person = {
+  name: 'Bruce Wayne'
+};
+person.name = 'Batman';
+
+const heroes = ['Batman'];
+heroes.push('Superman');
+
+// Bad - 객체/배열 재할당
+let person = {
+  name: 'Bruce Wayne'
+};
+person = {
+  name: 'Batman'
+};
+```
+
+#### 그룹화와 순서
+- 모든 `const` 선언을 먼저 그룹화하고 그 다음`let`선언을 그룹화합니다.
+```js
+// good
+const superPower = new SuperPower();
+const name = 'Bruce Wayne';
+let counter = 0;
+let items;
+
+// bad - const와 let 혼용
+let counter = 0;
+const superPower = new SuperPower();
+let items;
+const name = 'Bruce Wayne';
+```
+
+#### 호이스팅 방지
+- `var`는 호이스팅으로 인해 선언 전에 접근할 수 있기 때문에 사용 금지입니다.
+- `let`과 `const`로 선언한 변수는 선언하기 전까지 접근할 수 없습니다.
+- TDZ(Temporal Dead Zone) 이슈를 피하기 위해 선언 전에 참조하지 않습니다.
+- 변수는 사용하기 전 스코프의 시작부분에 선언합니다.
+
+```js
+// bad 
+function getUserName() {
+  console.log(userName);  // error! 아직 userName이 TDZ에 있음
+
+  let userName = "Bruce";
+  return userName;
+}
+
+//good 
+function getUserName() {
+  let userName = "Bruce";  // 먼저 선언
+
+  console.log(userName);  // 정상 동작
+  return userName;
+}
+```
+
+### 글로벌 변수
+- 전역 변수 사용을 피합니다.
+- 필요한 경우 모듈 패턴이나 클래스를 사용합니다.
+    
+```js
+// Bad - 전역 변수
+let userName = "John";
+const API_URL = "https://api.example.com";
+
+function someFunction() {
+  console.log(userName);  // 전역 변수 사용
+}
+
+// good - 모듈로 분리
+// userConfig.js
+export const userName = "John";
+export const API_URL = "https://api.example.com";
+
+// good - 필요한 스코프 내에서 선언
+function someFunction() {
+  const userName = "John";
+  console.log(userName);
+}
+
+// good - 클래스/객체 사용
+class UserService {
+  userName = "John";
+
+  someFunction() {
+    console.log(this.userName);
+  }
+}
+```
+
+### 변수 스코프
+- 변수는 사용되는 곳과 가장 가까운 스코프에서 선언합니다.
+- 블록 스코프를 적극적으로 활용합니다.
+```js
+// bad - 불필요하게 넓은 스코프
+function checkName(name) {
+  const validName = name && name.length > 0;
+  let returnValue;
+
+  if (!validName) {
+      returnValue = false;
+  } else {
+      returnValue = name;
+  }
+
+  return returnValue;
+}
+
+// good
+function checkName(name) {
+  const validName = name && name.length > 0;
+  if (!validName) {
+    return false;
+  }
+
+  return name;
+}
+```
+
+### 구조 분해 할당
+- 객체나 배열에서 필요한 값만 추출하여 사용합니다.
+- 함수의 매개변수로 객체를 받을 때 구조 분해를 활용하면 필요한 프로퍼티만 명시적으로 받을 수 있습니다.
+- 중첩된 객체의 경우에도 구조 분해를 활용할 수 있습니다.
+
+```javascript
+// ❌ bad
+const name = user.name;
+const age = user.age;
+function processUser(user) {
+  const id = user.id;
+  const name = user.name;
+}
+
+// ✅ good - 필요한 값 추출하여 사용
+const { name, age } = user;
+const [first, ...rest] = items;
+
+// ✅ good - 기본값 할당
+const { name = 'Anonymous', age = 0 } = user;
+
+// ✅ good - 함수의 매개변수로 객체를 받을 때
+function processUser({ id, name }) {}
+
+// ✅ good - 중첩된 객체의 구조 분해
+const { address: { street, city } } = user;
+
+```
+
+### 전개 구문 (Spread Operator)
+- 배열이나 객체를 복사하거나 병합할 때 전개 구문을 사용합니다.
+- 배열에서 `concat()` 대신 배열 전개 구문을 사용합니다.
+- 객체에서 `Object.assign()` 대신 객체 전개 구문을 사용하면 더 간결하고 읽기 쉽습니다.
+- 전개 구문은 얕은 복사(shallow copy)를 수행합니다.
+
+```javascript
+// ❌ bad
+const newArray = oldArray.concat([newItem]);
+const newObject = Object.assign({}, oldObject, { newProp: value });
+
+// ✅ good
+const newArray = [...oldArray, newItem];
+const newObject = { ...oldObject, newProp: value };
+
+// ✅ good - 배열 복사 및 추가
+const moreNumbers = [...numbers, 4, 5];
+
+// ✅ good - 여러 객체 병합
+const mergedObject = { ...obj1, ...obj2, ...obj3 };
+
+```
+
+### 옵셔널 체이닝과 Nullish 병합
+- 중첩된 객체 속성에 안전하게 접근할 때는 옵셔널 체이닝(?.)을 사용합니다.
+- 기본값 설정 시 Nullish 병합 연산자(??)을 권장합니다.
+- 논리 연산자(&&, ||) 대신 옵셔널 체이닝과 Nullish 병합을 권장합니다.
+
+```javascript
+// ❌ bad
+const name = user && user.profile && user.profile.name || 'Anonymous';
+const count = data && data.count || 0;  // 0이 유효한 값일 때도 덮어씀
+
+// ✅ good
+const name = user?.profile?.name ?? 'Anonymous';
+const count = data?.count ?? 0;
+```
+
+### 루프 최적화
+- 배열 길이는 루프 밖에서 캐시하여 사용합니다.
+- `for...of` 루프를 사용하여 성능을 향상시킵니다.
+- `for...in` 안에서는 hasOwnProperty 조건 검사를 수행합니다.
+```javascript
+// ❌ bad
+for (let i = 0; i < array.length; i++) {
+  // 매 반복마다 length 접근
+}
+
+// ✅ good - length 캐싱
+const length = array.length;
+for (let i = 0; i < length; i++) {
+  // 캐시된 length 사용
+}
+
+// ✅ good - for...of 사용
+for (const item of items) { }
+for (const [key, value] of Object.entries(obj)) { }
+for (const prop in object) {
+  if (object.hasOwnProperty(prop)) { }
+}
+```
+
+### 메모리 관리
+```javascript
+// Good
+function processLargeData() {
+  const heavyObject = {};
+  try {
+    // ... 작업 수행
+    return result;
+  } finally {
+    // 명시적 메모리 해제
+    heavyObject = null;
+  }
+}
+
+// Bad
+const heavyObject = {};  // 전역 범위 사용
+```
+
+## 주석 작성 규칙
+
+### 한줄 주석과 여러줄 주석
+- 한줄 주석은 `//`를 사용하며, 코드의 위나 오른쪽에 작성합니다.
+- 여러줄 주석은 `/* */` 를 사용하며, 첫번째와 마지막 줄을 비워두고 *로 정렬합니다.
+- 주석은 설명하려는 구문에 맞춰 들여쓰기를 합니다.
+- 문장 끝에 주석을 작성할 경우, 한줄 주석을 사용하며 공백을 추가합니다.
+- 코드 블럭 주석처은 단축키로 한줄 주석(`//`)을 사용합니다.
+
+```js
+// ❌ bad - 한줄주석은 //로 사용하며 공백 추가
+const name = 'Bruce Wayne';/* 한줄주석 */
+
+// ❌ bad - 여러줄 주석 규칙 어김
+/* 복잡한 정규식 설명:
+ 1. ^: 문자열의 시작
+ 2. [A-Z]: 대문자
+*/
+
+// ✅ good - 문장 끝 한줄 주석
+const name = 'Bruce Wayne'; // 이름
+
+// ✅ good - 여러줄 주석 (* 정렬 스타일)
+/*
+ * 복잡한 정규식 설명:
+ * 1. ^: 문자열의 시작
+ * 2. [A-Z]: 대문자
+ * 3. [a-z]*: 소문자 0개 이상
+ * 4. $: 문자열의 끝
+ */
+```
+
+### 주석 작성 원칙
+- 코드로 표현할 수 있는 것은 주석 대신 코드로 표현합니다.
+- 필요한 경우 비즈니스 로직의 "왜"를 설명하는 주석 작성합니다.
+- 임시 주석은 TODO, FIXME로 표시합니다.
+
+```javascript
+// ❌ bad - 자명한 내용에 대한 불필요한 주석
+// 숫자를 증가시킴
+count++;
+
+// ✅ good - 복잡한 로직 설명
+// 주말과 공휴일을 제외한 영업일 계산
+const businessDays = calculateBusinessDays(startDate, endDate);
+
+// ✅ good - TODO, FIXME 주석
+// TODO: 성능 최적화 필요
+// FIXME: 특정 케이스에서 버그 발생
+```
+
+### JSDoc 스타일 주석
+- JSDoc 스타일로 함수와 클래스 문서화를 권장합니다.
+- 복잡한 알고리즘이나 비즈니스 로직에 대한 설명을 작성합니다.
+```javascript
+// ✅ good - 함수 문서화
+/**
+ * 사용자 정보를 가져오는 함수
+ * @param {string} userId - 사용자 ID
+ * @returns {Promise<Object>} 사용자 정보 객체
+ * @throws {Error} 사용자를 찾을 수 없는 경우
+ */
+async function getUser(userId) { }
+
+// ✅ good - 클래스 문서화
+/**
+ * 사용자 인증을 처리하는 클래스
+ * @class
+ * @since 2.0.0
+ * @implements {AuthInterface}
+ */
+class AuthService {
+  /**
+   * AuthService 인스턴스를 생성합니다.
+   * @param {Object} config - 인증 설정
+   * @param {string} config.apiKey - API 키
+   * @param {string} [config.baseUrl] - 기본 URL (선택사항)
+   */
+  constructor(config) { }
+}
+```
+
+## 에러 처리
+
+### 에러 생성과 throw
+```javascript
+// Good
+class ValidationError extends Error {
+  constructor(message) {
+    super(message);
+    this.name = 'ValidationError';
+  }
+}
+
+throw new ValidationError('잘못된 입력값');
+
+// Bad
+throw 'Invalid input';  // 문자열 throw
+```
+
+### try-catch 사용
+```javascript
+// Good
+async function saveData() {
+  try {
+    await api.save(data);
+  } catch (error) {
+    logger.error({
+      message: error.message,
+      stack: error.stack,
+      context: 'saveData'
+    });
+    throw new CustomError('데이터 저장 실패', { cause: error });
+  }
+}
+
+// Bad
+async function saveData() {
+  try {
+    await api.save(data);
+  } catch (e) {
+    console.log(e);
+    throw e;
+  }
+}
+```
+
+## 비동기 처리
+
+### Promise 사용
+```javascript
+// Good
+async function getData() {
+  try {
+    const [user, items] = await Promise.all([
+      fetchUser(),
+      fetchItems()
+    ]);
+    return { user, items };
+  } catch (error) {
+    handleError(error);
+    throw error;
+  }
+}
+
+// Bad
+function getData() {
+  return fetchUser()
+    .then(user => {
+      return fetchItems()
+        .then(items => ({ user, items }));
+    });
+}
+```
 
 
 ---
@@ -616,6 +1043,7 @@ import { API_ROUTES } from '../constants/routes';
 현재버전: 0.0.5
 
 수정이력:
+- 2024.12.04(v.0.0.6): 기본 원칙, 주석 작성 규칙, 에러 처리, 비동기 처리 추가
 - 2024.11.07(v.0.0.5): 명명 규칙 폴더명 추가
 - 2024.11.07(v.0.0.4): 코드 구성 작성
 - 2024.11.07(v.0.0.3): 명명 규칙 API 요청 함수 추가
